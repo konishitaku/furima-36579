@@ -1,24 +1,51 @@
-# README
+## users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column                 | Type   | Options     |
+| ------------------     | ------ | ----------- |
+| nickname               | string | null: false |
+| email                  | string | null: false |
+| encrypted_password     | string | null: false |
+| name                   | string | null: false |
+| name_kana              | string | null: false |
+| birthday               | date   | null: false |
 
-Things you may want to cover:
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :purchase
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column                    | Type   | Options     |
+| --------------------------| ------ | ----------- |
+| image                     | string | null: false |
+| merchandise               | string | null: false |
+| text                      | text   | null: false |
+| category                  | string | null: false |
+| status                    | string | null: false |
+| load                      | string | null: false |
+| day                       | date   | null: false |
+| price                     | string | null: false |
 
-* Database initialization
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :users
+- has_one :purchase
 
-* Deployment instructions
+## purchase テーブル
 
-* ...
+| Column              | Type       | Options                        |
+| --------------------| ---------- | ------------------------------ |
+| postal_code         | string     | null: false, foreign_key: true |
+| area                | string     | null: false, foreign_key: true |
+| town                | string     | null: false, foreign_key: true |
+| address             | string     | null: false, foreign_key: true |
+| building            | string     | null: false, foreign_key: true |
+| telephone_number    | string     | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :items
