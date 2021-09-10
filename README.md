@@ -46,13 +46,13 @@
 | address             | string     | null: false, |
 | building            | string     |
 | telephone_number    | string     | null: false, |
-| prefectures_id      | integer    | null: false  |
+| area_id             | integer    | null: false  |
 | history             | references    | null: false, foreign_key: true |
 
 
 ### Association
 
-- has_one :history
+- belongs_to :history
 
 
 ## histories テーブル
