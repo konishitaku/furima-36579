@@ -3,7 +3,7 @@
 | Column                 | Type   | Options     |
 | ------------------     | ------ | ----------- |
 | nickname               | string | null: false |
-| email                  | string | null: false |
+| email                  | string | null: false ,unique: true |
 | encrypted_password     | string | null: false |
 | last_name              | string | null: false |
 | first_name             | string | null: false |
@@ -15,7 +15,7 @@
 ### Association
 
 - has_many :items
-- has_one :histories
+- has_many :histories
 
 ## items テーブル
 
@@ -34,7 +34,8 @@
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
+- has_one :history
 
 ## residences テーブル
 
@@ -51,7 +52,7 @@
 
 ### Association
 
-- has_one :histories
+- has_one :history
 
 
 ## histories テーブル
@@ -59,9 +60,10 @@
 | Column              | Type       | Options                        |
 | --------------------| ---------- | ------------------------------ |
 | user                | references | null: false, foreign_key: true |
-| items               | references | null: false, foreign_key: true |
+| item                | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :residences
+- has_one :residence
 - belongs_to :user
+- belongs_to item
