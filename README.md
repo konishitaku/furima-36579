@@ -3,18 +3,19 @@
 | Column                 | Type   | Options     |
 | ------------------     | ------ | ----------- |
 | nickname               | string | null: false |
-| email                  | string | unique: true|
+| email                  | string | null: false |
 | encrypted_password     | string | null: false |
-| last name              | string | null: false |
-| first name             | string | null: false |
-| last name_kana         | string | null: false |
-| first name_kana        | string | null: false |
+| last_name              | string | null: false |
+| first_name             | string | null: false |
+| last_name_kana         | string | null: false |
+| first_name_kana        | string | null: false |
 | birthday               | date   | null: false |
 
 
 ### Association
 
 - has_many :items
+- has_one :histories
 
 ## items テーブル
 
@@ -22,13 +23,13 @@
 | --------------------------| ------ | ----------- |
 | merchandise               | string | null: false |
 | text                      | text   | null: false |
-| category_2                | integer | null: false |
-| status_3                  | integer | null: false |
-| area_4                    | integer | null: false |
-| load_5                    | integer | null: false |
-| day_6                     | integer | null: false |
+| category_id               | integer | null: false |
+| status_id                 | integer | null: false |
+| area_id                   | integer | null: false |
+| load_id                   | integer | null: false |
+| day_id                    | integer | null: false |
 | price                     | integer | null: false |
-| user_id                   | string  | null: false, foreign_key: true |
+| user                      |references  | null: false, foreign_key: true |
 
 
 ### Association
@@ -42,24 +43,25 @@
 | postal_code         | string     | null: false, |
 | town                | string     | null: false, |
 | address             | string     | null: false, |
-| building            | string     | null: false, |
+| building            | string     |
 | telephone_number    | string     | null: false, |
-| prefectures_7       | integer    | null: false  |
-| history_id          | string     | null: false, foreign_key: true |
+| prefectures_id      | integer    | null: false  |
+| history             | references    | null: false, foreign_key: true |
 
 
 ### Association
 
-- has_many :histories
+- has_one :histories
 
 
 ## histories テーブル
 
 | Column              | Type       | Options                        |
 | --------------------| ---------- | ------------------------------ |
-| user_id             | string     | null: false, foreign_key: true |
-| items_id            | string     | null: false, foreign_key: true |
+| user                | references | null: false, foreign_key: true |
+| items               | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :residences
+- belongs_to :user
