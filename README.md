@@ -15,7 +15,6 @@
 ### Association
 
 - has_many :items
-- has_many :purchase
 
 ## items テーブル
 
@@ -35,9 +34,8 @@
 ### Association
 
 - belongs_to :users
-- has_one :purchase
 
-## information テーブル
+## residences テーブル
 
 | Column              | Type       | Options      |
 | --------------------| ---------- | ------------ |
@@ -46,15 +44,22 @@
 | address             | string     | null: false, |
 | building            | string     | null: false, |
 | telephone_number    | string     | null: false, |
+| prefectures_7       | integer    | null: false  |
+| history_id          | string     | null: false, foreign_key: true |
+
 
 ### Association
 
-- belongs_to :user
-- belongs_to :items
+- has_many :histories
 
-## history テーブル
+
+## histories テーブル
 
 | Column              | Type       | Options                        |
 | --------------------| ---------- | ------------------------------ |
-| user_id   | string     | null: false, foreign_key: true |
-| items_id  | string     | null: false, foreign_key: true |
+| user_id             | string     | null: false, foreign_key: true |
+| items_id            | string     | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :residences
