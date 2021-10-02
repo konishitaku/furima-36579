@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:edit, :update]
-  before_action :correct_post,only: [:edit, :update]
+  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :correct_post,only: [:edit, :update ,:destroy]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
   end
 
   def edit
@@ -35,13 +36,9 @@ class ItemsController < ApplicationController
    end
   end
 
-  #def destroy
-    #@item.destroy
-    #redirect_to root_path
-  #end
-
-  def set_item
-    @item = Item.find(params[:id])
+  def destroy
+    @item.destroy
+    redirect_to root_path
   end
 
 
@@ -57,3 +54,8 @@ def correct_post
    redirect_to root_path
   end
  end
+
+ def set_item
+  @item = Item.find(params[:id])
+end
+
