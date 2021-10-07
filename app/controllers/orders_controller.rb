@@ -1,12 +1,13 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
+  before_action :correct_post,only: [:index,:create]
 
   def index
     @order_residence = OrderResidence.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_residence = OrderResidence.new(order_params)
     if @order_residence.valid?
       pay_item
@@ -24,12 +25,21 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_2ac26fbe58499a23b8eb0aac"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @item.price,
       card: order_params[:token],
       currency: 'jpy'
     )
   end
+
+  def correct_post
+    if @item.user_id == current_user.id || @item.order != nil
+  redirect_to root_path
+end
+    def set_item
+     @item = Item.find(params[:id])
+    end
+end
 end
 
