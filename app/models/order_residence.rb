@@ -6,7 +6,7 @@ class OrderResidence
       validates :area_id, numericality: { other_than: 0, message: "Select" }
       validates :town
       validates :address
-      validates :telephone_number, format: { with: /\A\d{10,11}\z/, message: "Telephone number can't be blank"}
+      validates :telephone_number, format: { with: /\A\d{10,11}\z/, message: "can't be blank"}
       validates :user_id
       validates :item_id
       validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
