@@ -37,9 +37,9 @@ class OrdersController < ApplicationController
     if @item.user_id == current_user.id || @item.order != nil
   redirect_to root_path
 end
-    def set_item
-     @item = Item.find(params[:id])
-    end
 end
+    def set_item
+      @item = Item.find(params[:item_id])
+    end
 end
 

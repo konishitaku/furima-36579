@@ -18,6 +18,7 @@ RSpec.describe Order, type: :model do
     end
     it '建物名が空でも購入できること' do
       @order.building = nil
+      expect(@order).to be_valid
     end
     end
     context '登録できない時' do
@@ -70,6 +71,16 @@ RSpec.describe Order, type: :model do
     end
     it 'telephone_numberが12桁では購入できない' do
       @order.telephone_number = "090123456789"
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Telephone number Telephone number can't be blank")
+    end
+    it 'telphone_numberが9桁では購入できないこと' do
+      @order.telephone_number = "090123456"
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Telephone number Telephone number can't be blank")
+    end
+    it 'telephone_numberが半角数字以外では登録できない' do
+      @order.telephone_number = "０９０１２３４５６７８"
       @order.valid?
       expect(@order.errors.full_messages).to include("Telephone number Telephone number can't be blank")
     end
